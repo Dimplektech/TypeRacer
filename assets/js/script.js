@@ -75,6 +75,47 @@ function updateSampleText() {
     resultLevel.textContent = selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1);
 }
 
+//  Function to provide real-time feedback
+function provideFeedback() {
+    const typedText = typingInput.value;
+    let highlightedText = '';
+    
+    // Process each character for highlighting
+    for (let i = 0; i < currentText.length; i++) {
+        if (i < typedText.length) {
+            // Character has been typed
+            if (typedText[i] === currentText[i]) {
+                // Correct character - blue
+                highlightedText += `<span class="correct-char">${currentText[i]}</span>`;
+            } else {
+                // Incorrect character - red
+                highlightedText += `<span class="incorrect-char">${currentText[i]}</span>`;
+            }
+        } else {
+            // Character not yet typed - normal
+            highlightedText += currentText[i];
+        }
+    }
+    
+    // Update the sample text with highlighted version
+    sampleTextElement.innerHTML = highlightedText;
+    
+    // Calculate and update real-time accuracy
+    if (typedText.length > 0) {
+        let correctChars = 0;
+        const minLength = Math.min(typedText.length, currentText.length);
+        
+        for (let i = 0; i < minLength; i++) {
+            if (typedText[i] === currentText[i]) {
+                correctChars++;
+            }
+        }
+        
+        const accuracy = Math.round((correctChars / typedText.length) * 100);
+        resultAccuracy.textContent = accuracy + '%';
+    }
+}
+
 // Start the typing test
 function startTest() {
     // Reset results
@@ -90,7 +131,10 @@ function startTest() {
     stopButton.disabled = false;
     retryButton.disabled = true;
     difficultySelect.disabled = true;
-    
+
+    // Add event listener for real-time feedback
+    typingInput.addEventListener('input', provideFeedback);
+
     // Start the timer
     startTime = new Date();
     timerInterval = setInterval(updateTimer, 1000);
@@ -106,6 +150,10 @@ function updateTimer() {
 // Stop the typing test
 function stopTest() {
     clearInterval(timerInterval);
+
+    // Remove the input event listener
+    typingInput.removeEventListener('input', provideFeedback);
+
     
     // Calculate results
     const endTime = new Date();

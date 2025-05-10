@@ -28,3 +28,23 @@ header h1 {
     display: block;
     margin-top: 10px
 }
+
+/*  styles for character highlighting */
+.correct-char {
+    color: #0066cc;
+    background-color: rgba(0, 102, 204, 0.1);
+}
+
+.incorrect-char {
+    color: #cc0000;
+    background-color: rgba(204, 0, 0, 0.1);
+    text-decoration: underline;
+}
+
+/* Optional: Add this to ensure the sample text keeps its layout */
+#sample-text {
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
