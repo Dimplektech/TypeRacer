@@ -31,12 +31,55 @@
                     
                 </div>
                 <p> Test your typing speed by typing the text shown below:</p>
-            </div>
+                 
+                <!-- Sample Text Area -->
+                <div class="sample-text mb-3 p-3 border rounded bg-light">
+                    <p id="sample-text">The quick brown fox jumps over the lazy dog. This pangram contains all letters of the English alphabet. It's commonly used to test typing speed and accuracy in typing exercises.</p>
+                </div>
+                
+                <!-- Text Input Area -->
+                <div class="mb-3">
+                    <label for="typing-input" class="form-label">Type here:</label>
+                    <textarea class="form-control" id="typing-input" rows="4" placeholder="Start typing..." disabled></textarea>
+                </div>
+                
+                <!-- Control Buttons -->
+                <div class="d-flex gap-2 mb-4">
+                    <button class="btn btn-success" id="start-btn">Start Test</button>
+                    <button class="btn btn-danger" id="stop-btn" disabled>Stop Test</button>
+                    <button class="btn btn-secondary" id="retry-btn" disabled>Retry</button>
+                </div>
+                </div>
 
-            <div class="result-area col-md-4">
-                <h2>Results</h2>
-                <p id="result"></p>
-            </div>
+                <div class="result-area col-md-4">
+                    <h2>Results</h2>
+                    <p id="result"></p>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Difficulty Level:</strong>
+                                    <span id="result-level">-</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Time Elapsed:</strong>
+                                    <span id="result-time">0s</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Speed (WPM):</strong>
+                                    <span id="result-wpm">0</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Accuracy:</strong>
+                                    <span id="result-accuracy">0%</span>
+                                </li>
+                            </ul>
+                            <div class="mt-3">
+                                <p id="result-message" class="text-center"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
         </div>
 
