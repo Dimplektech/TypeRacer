@@ -32,6 +32,8 @@ const resultLevel = document.getElementById('result-level');
 const resultTime = document.getElementById('result-time');
 const resultWpm = document.getElementById('result-wpm');
 const resultAccuracy = document.getElementById('result-accuracy');
+// Instructions Modal Functionality
+const instructionButton = document.getElementById('instruction');
 
 // Variables to track test state
 let startTime;
@@ -198,9 +200,49 @@ difficultySelect.addEventListener('change', updateSampleText);
 startButton.addEventListener('click', startTest);
 stopButton.addEventListener('click', stopTest);
 retryButton.addEventListener('click', retryTest);
+// Add event listener to the instruction button
+instructionButton.addEventListener('click', function() {
+    // Use Bootstrap's Modal API to show the modal
+    const instructionsModal = new bootstrap.Modal(document.getElementById('instructionsModal'));
+    instructionsModal.show();
+});
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    // Create modal elements
+    const modalHTML = `
+    <div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="instructionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="instructionsModalLabel">How to Use Type Racer</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="mb-3">Follow these steps to test your typing speed:</h6>
+                    <ol class="list-group list-group-numbered mb-3">
+                        <li class="list-group-item">Select a difficulty level from the dropdown menu (Easy, Medium, or Hard)</li>
+                        <li class="list-group-item">Click the "Start Test" button to begin the timer</li>
+                        <li class="list-group-item">Type the displayed text in the input area as accurately and quickly as possible</li>
+                        <li class="list-group-item">The text will highlight in blue (correct) or red (incorrect) as you type</li>
+                        <li class="list-group-item">Click "Stop Test" when you've finished typing</li>
+                        <li class="list-group-item">View your results including WPM (Words Per Minute) and accuracy</li>
+                        <li class="list-group-item">Click "Retry" to try again with a new text sample</li>
+                    </ol>
+                    <p class="alert alert-info">
+                        <strong>Tip:</strong> Focus on accuracy first, then work on improving your speed. Regular practice will help you become a faster typist!
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+    
+    // Add modal to the document
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
     // Set initial state
     typingInput.disabled = true;
     stopButton.disabled = true;
